@@ -58,14 +58,14 @@ describe("migrateTasks", () => {
     const first = tasks.find((t) => t.id === "task-1")!;
     expect(first.customer).toBe("صنایع آریا شرق"); // display name untouched
     expect(first.customerId).toBe("cus-101");
-    expect(first.dateIso).toBe("2024-10-16"); // ۲۴ مهر ۱۴۰۳
+    expect(first.dateIso).toBe("2024-10-15"); // ۲۴ مهر ۱۴۰۳ = 2024-10-15
   });
 
   it("leaves a task with an unknown customer untouched and reports it", () => {
     const orphan: CrmTask = { id: "task-x", title: "تماس", customer: "مشتری ناشناس", date: "۲۴ مهر ۱۴۰۳", time: "۰۹:۰۰", group: "امروز", type: "تماس", completed: false };
     const { tasks, skipped } = migrateTasks([orphan], demoCustomers);
     expect(tasks[0]!.customerId).toBeUndefined();
-    expect(tasks[0]!.dateIso).toBe("2024-10-16");
+    expect(tasks[0]!.dateIso).toBe("2024-10-15");
     expect(skipped).toHaveLength(1);
   });
 
